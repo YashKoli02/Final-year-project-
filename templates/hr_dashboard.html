@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard {% endblock title %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Hello, <b>{{fname}}</b></h2>
+        </div>
+
+    </div>
+</section><!-- End Breadcrumbs -->
+
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="hr_dashboard">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="create_job">Job Create</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-9 px-md-9 ms-4" style="height:600px; overflow: scroll;">
+            <div class="m-3">
+                {% for job in jobs %}
+                <div class="card border-dark mb-3">
+                    <div class="card-header">{{job.location}}</div>
+                    <div class="card-body text-dark">
+                      <h5 class="card-title">{{job.job_position}}</h5>
+                      <h6 class="card-title">Salary : {{job.salary}} /month</h6>
+                      <h6 class="card-title">Years of Experience : {{job.years_of_experience}} yrs</h6>
+                      <p class="card-text"><b>Job Description:</b> <br>{{job.job_description}}</p>
+                      <p class="card-text"><b>Key Skills :</b> <br>{{job.required_skills}}</p>
+                    </div>
+                  </div>
+                {% endfor %}
+                
+            </div>
+        </main>
+    </div>
+
+
+<style>
+    .sidebar {
+        height: 100%;
+        width: 250px;
+        height: 600px; /* Subtract the header height */
+        position: relative;
+        top: 0;
+        left: 0;
+        background-color: #d9232d; /* Bootstrap light gray background color */
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .sidebar a {
+        padding: 10px;
+        text-decoration: none;
+        font-size: 20px;
+        color: white; /* Bootstrap dark color */
+        display: block;
+    }
+    
+    .sidebar a:hover {
+        background-color: #e9ecef; /* Bootstrap gray hover color */
+    }
+</style>
+{% endif %}
+{% endblock body %}

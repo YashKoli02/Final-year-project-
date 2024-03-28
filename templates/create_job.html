@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard {% endblock title %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Hello, <b>{{fname}}</b></h2>
+        </div>
+
+    </div>
+</section><!-- End Breadcrumbs -->
+
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="hr_dashboard">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="create_job">Job Create</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
+        <main role="main" class="col-md-7 ml-sm-auto col-lg-7 px-md-4 mx-auto">
+            <div class="m-3">
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2>Create New Job</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <label class="form-group" for="lname">Job Position</label>
+                            {{form.job_position}}
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <label class="form-group" for="lname">Year of Experience</label>
+                            {{form.years_of_experience}}
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label class="form-group" for="username">Job Description</label>
+                        {{form.job_description}}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <label class="form-group" for="lname">Salary</label>
+                            {{form.salary}}
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <label class="form-group" for="lname">Location</label>
+                            {{form.location}}
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label class="form-group" for="username">Required Skills</label>
+                        {{form.required_skills}}
+                    </div>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-danger" type="submit">Create Job</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </main>
+    </div>
+
+
+<style>
+    .sidebar {
+        height: 100%;
+        width: 250px;
+        height: 600px; /* Subtract the header height */
+        position: relative;
+        top: 0;
+        left: 0;
+        background-color: #d9232d; /* Bootstrap light gray background color */
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .sidebar a {
+        padding: 10px;
+        text-decoration: none;
+        font-size: 20px;
+        color: white; /* Bootstrap dark color */
+        display: block;
+    }
+    
+    .sidebar a:hover {
+        background-color: #e9ecef; /* Bootstrap gray hover color */
+    }
+</style>
+{% endif %}
+{% endblock body %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Result
+{% endblock title %}
+
+
+{% block body %}
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Welcome, <b>{{fname}}</b></h2>
+        </div>
+
+    </div>
+</section><!-- End Breadcrumbs -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mt-lg-0 m-auto">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2>Applicant Result</h2>
+                </div>
+                <div class="row col-lg-12">
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                        <h5 class="form-group">Applicant First Name : </h5>
+                        <h3>{{result_data.applicant_first_name}}  {{result_data.applicant_last_name}}</h3><br>
+                        <h5 class="form-group">Prediction : </h5>
+                        <h3>{{result_data.prediction}}</h3>
+                        <h5 class="form-group mt-4">Level : </h5>
+                        <h3>{{result_data.user_level}}</h3>
+                        <h5 class="form-group mt-4">Skills you have : </h5>
+                        {% for skill in skills %}
+                        <button class="btn btn-success m-1">{{skill}} </button>
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                        <h5 class="form-group">Applicant's Resume : </h5>
+                        <object data="{{ result_data.applicant_cv.url }}" type="application/pdf" width="100%" height="600px">
+                            <p>Show / Download Resume :  <a href="{{ result_data.applicant_cv.url }}" target="_blank">download the PDF file</a>.</p>
+                          </object>
+                        <h5 class="form-group mt-4">Resume Pages : </h5>
+                        <h3>{{result_data.no_of_pages}}</h3>
+                        <h5 class="form-group mt-4">Resume Score : </h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{result_data.resume_score}}%;" aria-valuenow="{{result_data.resume_score}}" aria-valuemin="0" aria-valuemax="100">{{result_data.resume_score}} %</div>
+                        </div>
+                        <h5 class="form-group mt-4">Recommended Skills for You : </h5>
+                        {% for rec in rec_skills %}
+                        <button class="btn btn-outline-danger m-1">{{rec}} </button>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <a href="dashboard" class="btn btn-primary btn-lg animate__animated animate__fadeInUp scrollto m-2">Go to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section><!-- End Log In Section -->
+
+{% endblock body %}
